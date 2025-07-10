@@ -1,0 +1,14 @@
+resources:
+  pipelines:
+    pipeline_dlt_pipeline:
+      name: dlt-pipeline
+      configuration:
+        catalog: "${var.catalog}"
+      libraries:
+        - notebook:
+            path: ../citibike_etl\dlt\bronze\01_bronze_citibike.ipynb
+      schema: 01_bronze
+      development: true
+      photon: true
+      catalog: "${var.catalog}"
+      serverless: true
