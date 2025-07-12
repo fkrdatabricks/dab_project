@@ -40,7 +40,6 @@ jobs:
 
    - name: Deploy to TEST
      run: |
-      cd ../../dab_project
       databricks bundle deploy \
        --target test \
        --profile TEST
