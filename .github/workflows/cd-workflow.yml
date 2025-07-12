@@ -1,0 +1,48 @@
+name: CD workflow
+
+on:
+ push:
+  branches:
+   - main
+
+jobs:
+ cd_deploy-test:
+  name: Deploy to TEST
+  runs-on: ubuntu-latest
+  environment: test
+  steps:
+   - name: checkout code
+     uses: actions/checkout@v3
+
+   - name: Set up Python
+     uses: actions/setup-python@v4
+     with:
+      python-version: '3.11'
+
+   - name: Install Databricks CLI
+     run: curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+
+   - name: Install Dependencies
+     run: |
+      pip install --upgrade pip
+      pip install setuptools wheel
+
+   - name: Configure Databricks
+     run: |
+      # Write out the profile (here called "TEST")
+      cat <<EOF > ~/.databrickscfg
+      [TEST]
+      host = https://adb-1409789320757587.7.azuredatabricks.net/
+      azure_client_id = ${{secrets.AZURE_CLIENT_ID}}
+      azure_tenant_id = ${{secrets.AZURE_CLIENT_ID}}
+      azure_client_secret = ${{secrets.AZURE_CLIENT_SECRET}}
+      EOF
+
+   - name: Deploy to TEST
+     run: |
+      databricks bundle deploy \
+       --target test \
+       --profile test
+
+     
+
