@@ -6,7 +6,7 @@ resources:
         catalog: "${var.catalog}"
       libraries:
         - notebook:
-            path: ../citibike_etl\dlt\bronze\01_bronze_citibike.ipynb
+            path: ../citibike_etl/dlt/bronze/01_bronze_citibike.ipynb
       schema: 01_bronze
       development: false
       photon: true
