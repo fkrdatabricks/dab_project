@@ -8,7 +8,7 @@ resources:
         - notebook:
             path: ../citibike_etl\dlt\bronze\01_bronze_citibike.ipynb
       schema: 01_bronze
-      development: true
+      development: false
       photon: true
       catalog: "${var.catalog}"
       serverless: true

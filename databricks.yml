@@ -26,6 +26,7 @@ targets:
 
   test:
     mode: production
+    default: false
     variables:
       catalog: 
         default: "citibike_test"
@@ -34,8 +35,10 @@ targets:
       # We explicitly deploy to /Workspace/Users/fkrdatabricks@gmail.com to make sure we only have a single copy.
       root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
     permissions:
-      - user_name: fkrdatabricks@gmail.com
+      - service_principal_name: 1724443f-f803-4d14-aeb9-b40a86e579ee
         level: CAN_MANAGE
+    run_as:
+      service_principal_name: 1724443f-f803-4d14-aeb9-b40a86e579ee
 
   prod:
     mode: production
