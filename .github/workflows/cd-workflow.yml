@@ -42,7 +42,7 @@ jobs:
      run: |
       databricks bundle deploy \
        --target test \
-       --profile test
+       --profile TEST
 
      
 
